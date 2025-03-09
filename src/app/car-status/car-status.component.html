@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Car Status</h1>
+  <div class="car-list">
+    <div class="car-card" *ngFor="let car of cars">
+      <h3>{{ car.name }}</h3>
+      <p>Type: {{ car.type }}</p>
+      <p>Price: ${{ car.pricePerDay }} / day</p>
+      <p [ngClass]="{'available': car.available && !hasPendingRequest(car.id), 'unavailable': !car.available, 'pending': hasPendingRequest(car.id)}">
+        {{ car.available && !hasPendingRequest(car.id) ? 'Available' : (hasPendingRequest(car.id) ? 'Pending Rental' : 'Rented') }}
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+    <h1>Travel Request</h1>
+    <form (ngSubmit)="onSubmit()" class="travel-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="travelRequest.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" [(ngModel)]="travelRequest.address" name="address" required>
+      </div>
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" [(ngModel)]="travelRequest.age" name="age" required min="18">
+      </div>
+      <div class="form-group">
+        <label for="origin">Origin:</label>
+        <input type="text" id="origin" [(ngModel)]="travelRequest.origin" name="origin" placeholder="e.g., New York, NY" required>
+      </div>
+      <div class="form-group">
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" [(ngModel)]="travelRequest.destination" name="destination" placeholder="e.g., Los Angeles, CA" required>
+      </div>
+      <div class="form-group">
+        <label for="date">Travel Date:</label>
+        <input type="date" id="date" [(ngModel)]="travelRequest.date" name="date" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Request</button>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <div class="route" *ngIf="route">
+        <h3>Route Details</h3>
+        <p>{{ route }}</p>
+      </div>
+    </form>
+  </div>

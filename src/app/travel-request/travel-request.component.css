@@ -1,0 +1,118 @@
+.container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    animation: fadeIn 0.5s ease-in-out;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    color: #2c3e50;
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  
+  .travel-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  label {
+    color: #7f8c8d;
+    font-weight: 500;
+  }
+  
+  input {
+    padding: 12px;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #1e90ff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+  }
+  
+  button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #1e90ff, #4169e1);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-self: flex-start;
+  }
+  
+  button:hover {
+    background: linear-gradient(45deg, #4169e1, #1e90ff);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .error {
+    color: #e74c3c;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+  
+  .route {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .route h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .route p {
+    color: #7f8c8d;
+    font-size: 1.1em;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+      padding: 20px;
+    }
+  
+    input {
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.8em;
+    }
+  
+    button {
+      padding: 10px 20px;
+    }
+  }

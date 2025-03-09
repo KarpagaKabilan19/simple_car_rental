@@ -1,0 +1,57 @@
+<div class="container">
+  <h1>Admin Dashboard</h1>
+  <button class="logout-btn" (click)="logout()">Logout</button>
+
+  <h2>Add New Car</h2>
+  <div class="add-car-form">
+    <form (ngSubmit)="addCar()" class="car-form">
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Name" [(ngModel)]="newCar.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <input type="text" id="type" placeholder="Type" [(ngModel)]="newCar.type" name="type" required>
+      </div>
+      <div class="form-group">
+        <input type="number" id="price" placeholder="Price Per Day" [(ngModel)]="newCar.pricePerDay" name="price" required min="0">
+      </div>
+      <div class="form-group file-input-wrapper">
+        <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" required>
+        <label for="image" class="file-input-label">Choose File</label>
+        <span class="file-input-text">{{ newCarImage ? 'Image selected' : 'No file chosen' }}</span>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!newCarImage">Add Car</button>
+    </form>
+  </div>
+
+  <h2>Car List</h2>
+  <div class="car-list">
+    <div class="car-card-admin" *ngFor="let car of cars; let i = index" (click)="selectCar(car.id)" [ngClass]="{'selected': selectedCarId === car.id}">
+      <h3>{{ car.name }}</h3>
+      <p>Type: {{ car.type }}</p>
+      <p>Price: ${{ car.pricePerDay }}/day</p>
+      <p [ngClass]="{'available': car.available && !carService.hasPendingRequest(car.id) && !car.rented, 'pending': carService.hasPendingRequest(car.id), 'rented': car.rented}">
+        {{ car.available && !carService.hasPendingRequest(car.id) && !car.rented ? 'Available' :
+           carService.hasPendingRequest(car.id) ? 'Waiting for Approval' :
+           car.rented ? 'Rented' : 'Rented' }}
+      </p>
+      <button class="end-ride-btn" (click)="endRide(car.id); $event.stopPropagation()" [disabled]="!car.rented">End Ride</button>
+      <button class="remove-car-btn" (click)="removeCar(car.id, car.name); $event.stopPropagation()" [disabled]="car.rented || carService.hasPendingRequest(car.id)">Remove Car</button>
+    </div>
+  </div>
+
+  <h2 *ngIf="selectedCarId !== null">Travel Requests for {{ selectedCarName }}</h2>
+  <div class="travel-details" *ngIf="selectedCarId !== null && filteredTravelRequests.length > 0">
+    <div class="details-group" *ngFor="let request of filteredTravelRequests; let i = index">
+      <p><strong>Name:</strong> {{ request.name }}</p>
+      <p><strong>Address:</strong> {{ request.address }}</p>
+      <p><strong>Age:</strong> {{ request.age }}</p>
+      <p><strong>Origin:</strong> {{ request.origin }}</p>
+      <p><strong>Destination:</strong> {{ request.destination }}</p>
+      <p><strong>Date:</strong> {{ request.date }}</p>
+      <p><strong>Car ID:</strong> {{ request.carId }}</p>
+      <button class="btn btn-success" (click)="approveRequest(i)" [disabled]="request.approved">Approve</button>
+    </div>
+  </div>
+  <p *ngIf="selectedCarId !== null && filteredTravelRequests.length === 0">No travel requests found for this vehicle.</p>
+  <p *ngIf="selectedCarId === null">Please select a vehicle to view travel requests.</p>
+</div>
